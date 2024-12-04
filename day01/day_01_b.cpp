@@ -1,25 +1,11 @@
 #include "input.hpp"
-#include "strutils.hpp"
 #include <catch2/catch_all.hpp>
-#include <algorithm>
+#include <common/file_line.hpp>
+#include <common/strutils.hpp>
 #include <map>
 #include <ranges>
 #include <sstream>
 #include <vector>
-
-struct FileLine {
-    std::string line;
-    size_t line_number = 0;
-
-    friend std::istream& operator>>(std::istream& s, FileLine& fl)
-    {
-        std::getline(s, fl.line);
-
-        ++fl.line_number;
-
-        return s;
-    }
-};
 
 int day01_b(std::string const& input)
 {
