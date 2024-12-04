@@ -9,3 +9,4 @@ set(CXX_STANDARD 23)
 
 add_subdirectory(ext)
 add_subdirectory(day01)
+add_subdirectory(day02)
