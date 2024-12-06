@@ -38,11 +38,9 @@ int day02_a(std::string const& input)
             = std::ranges::all_of(differences, [](auto v) { return abs(v) > 0 && abs(v) <= 3; });
 
         return (all_positive != all_negative) && in_allowed_range;
-    }) |
-        // needed for counting
-        std::views::transform([](auto const& /*differences*/) { return 1; });
+    });
 
-    return std::ranges::fold_left(view, 0, std::plus());
+    return std::ranges::distance(view.cbegin(), view.cend());
 }
 
 TEST_CASE("02a example input")

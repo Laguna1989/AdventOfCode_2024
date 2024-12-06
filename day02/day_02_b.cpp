@@ -25,6 +25,7 @@ int day02_b(std::string const& input)
         return report;
     }) | std::views::transform([](auto const& report) {
         std::vector<std::deque<int>> allReportOptions;
+        // create all possible options from dropping any number
         for (auto i = 0u; i < report.size(); ++i) {
             std::vector<int> difCopy { report.cbegin(), report.cend() };
             difCopy.erase(std::next(difCopy.begin(), i));
@@ -48,9 +49,9 @@ int day02_b(std::string const& input)
 
             return (all_negative != all_positive) && in_allowed_range;
         });
-    }) | std::views::transform([](auto const& /*differences*/) { return 1; });
+    });
 
-    return std::ranges::fold_left(view, 0, std::plus());
+    return std::ranges::distance(view.cbegin(), view.cend());
 }
 
 TEST_CASE("02b example input")
