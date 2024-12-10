@@ -36,7 +36,7 @@ namespace strutil {
  * @return Converted value as std::string.
  */
 template <typename T>
-static inline std::string to_string(T value)
+static std::string to_string(T value)
 {
     std::stringstream ss;
     ss << value;
@@ -52,7 +52,7 @@ static inline std::string to_string(T value)
  * @return Variable of datatype T.
  */
 template <typename T>
-static inline T parse_string(const std::string& str)
+static T parse_string(const std::string& str)
 {
     T result;
     std::istringstream(str) >> result;
@@ -65,7 +65,7 @@ static inline T parse_string(const std::string& str)
  * @param str - std::string that needs to be converted.
  * @return Lower case input std::string.
  */
-static inline std::string to_lower(const std::string& str)
+static std::string to_lower(const std::string& str)
 {
     auto result = str;
     std::transform(
@@ -81,7 +81,7 @@ static inline std::string to_lower(const std::string& str)
  * @param str - std::string that needs to be converted.
  * @return Upper case input std::string.
  */
-static inline std::string to_upper(const std::string& str)
+static std::string to_upper(const std::string& str)
 {
     auto result = str;
     std::transform(
@@ -98,7 +98,7 @@ static inline std::string to_upper(const std::string& str)
  * @param substring - searched substring.
  * @return True if substring was found in str, false otherwise.
  */
-static inline bool contains(const std::string& str, const std::string& substring)
+static bool contains(const std::string& str, const std::string& substring)
 {
     return str.find(substring) != std::string::npos;
 }
@@ -109,7 +109,7 @@ static inline bool contains(const std::string& str, const std::string& substring
  * @param character - searched character.
  * @return True if character was found in str, false otherwise.
  */
-static inline bool contains(const std::string& str, const char character)
+static bool contains(const std::string& str, const char character)
 {
     return contains(str, std::string(1, character));
 }
@@ -120,7 +120,7 @@ static inline bool contains(const std::string& str, const char character)
  * @param str2 - std::string to compare
  * @return True if str1 and str2 are equal, false otherwise.
  */
-static inline bool compare_ignore_case(const std::string& str1, const std::string& str2)
+static bool compare_ignore_case(const std::string& str1, const std::string& str2)
 {
     return to_lower(str1) == to_lower(str2);
 }
@@ -131,7 +131,7 @@ static inline bool compare_ignore_case(const std::string& str1, const std::strin
  * http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring.
  * @param str - input std::string to remove white spaces from.
  */
-static inline void trim_left(std::string& str)
+static void trim_left(std::string& str)
 {
     str.erase(str.begin(),
         std::find_if(str.begin(), str.end(), [](int ch) { return !std::isspace(ch); }));
@@ -143,7 +143,7 @@ static inline void trim_left(std::string& str)
  * http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring.
  * @param str - input std::string to remove white spaces from.
  */
-static inline void trim_right(std::string& str)
+static void trim_right(std::string& str)
 {
     str.erase(
         std::find_if(str.rbegin(), str.rend(), [](int ch) { return !std::isspace(ch); }).base(),
@@ -156,7 +156,7 @@ static inline void trim_right(std::string& str)
  * http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring.
  * @param str - input std::string to remove white spaces from.
  */
-static inline void trim(std::string& str)
+static void trim(std::string& str)
 {
     trim_left(str);
     trim_right(str);
@@ -169,7 +169,7 @@ static inline void trim(std::string& str)
  * @param str - input std::string to remove white spaces from.
  * @return Copy of input str with trimmed white spaces.
  */
-static inline std::string trim_left_copy(std::string str)
+static std::string trim_left_copy(std::string str)
 {
     trim_left(str);
     return str;
@@ -182,7 +182,7 @@ static inline std::string trim_left_copy(std::string str)
  * @param str - input std::string to remove white spaces from.
  * @return Copy of input str with trimmed white spaces.
  */
-static inline std::string trim_right_copy(std::string str)
+static std::string trim_right_copy(std::string str)
 {
     trim_right(str);
     return str;
@@ -195,7 +195,7 @@ static inline std::string trim_right_copy(std::string str)
  * @param str - input std::string to remove white spaces from.
  * @return Copy of input str with trimmed white spaces.
  */
-static inline std::string trim_copy(std::string str)
+static std::string trim_copy(std::string str)
 {
     trim(str);
     return str;
@@ -210,7 +210,7 @@ static inline std::string trim_copy(std::string str)
  * @param replecament - substring that will replace target.
  * @return True if replacement was successfull, false otherwise.
  */
-static inline bool replace_first(
+static bool replace_first(
     std::string& str, const std::string& target, const std::string& replecament)
 {
     size_t start_pos = str.find(target);
@@ -231,7 +231,7 @@ static inline bool replace_first(
  * @param replecament - substring that will replace target.
  * @return True if replacement was successfull, false otherwise.
  */
-static inline bool replace_last(
+static bool replace_last(
     std::string& str, const std::string& target, const std::string& replecament)
 {
     size_t start_pos = str.rfind(target);
@@ -252,7 +252,7 @@ static inline bool replace_last(
  * @param replecament - substring that will replace target.
  * @return True if replacement was successfull, false otherwise.
  */
-static inline bool replace_all(
+static bool replace_all(
     std::string& str, const std::string& target, const std::string& replecament)
 {
     if (target.empty()) {
@@ -276,7 +276,7 @@ static inline bool replace_all(
  * @param suffix - searched suffix in str.
  * @return True if suffix was found, false otherwise.
  */
-static inline bool ends_with(const std::string& str, const std::string& suffix)
+static bool ends_with(const std::string& str, const std::string& suffix)
 {
     const auto pos = str.rfind(suffix);
 
@@ -289,7 +289,7 @@ static inline bool ends_with(const std::string& str, const std::string& suffix)
  * @param suffix - searched character in str.
  * @return True if ends with character, false otherwise.
  */
-static inline bool ends_with(const std::string& str, const char suffix)
+static bool ends_with(const std::string& str, const char suffix)
 {
     return (str.size() > 0) && (*(str.end() - 1) == suffix);
 }
@@ -300,7 +300,7 @@ static inline bool ends_with(const std::string& str, const char suffix)
  * @param prefix - searched prefix in str.
  * @return True if prefix was found, false otherwise.
  */
-static inline bool starts_with(const std::string& str, const std::string& prefix)
+static bool starts_with(const std::string& str, const std::string& prefix)
 {
     return str.find(prefix) == 0;
 }
@@ -311,7 +311,7 @@ static inline bool starts_with(const std::string& str, const std::string& prefix
  * @param prefix - searched character in str.
  * @return True if starts with character, false otherwise.
  */
-static inline bool starts_with(const std::string& str, const char prefix)
+static bool starts_with(const std::string& str, const char prefix)
 {
     return (str.size() > 0) && (str[0] == prefix);
 }
@@ -322,7 +322,7 @@ static inline bool starts_with(const std::string& str, const char prefix)
  * @param delim - the delimiter.
  * @return std::vector<std::string> that contains all splitted tokens.
  */
-static inline std::vector<std::string> split(const std::string& str, const char delim)
+static std::vector<std::string> split(const std::string& str, const char delim)
 {
     std::vector<std::string> tokens;
     std::stringstream ss(str);
@@ -347,7 +347,7 @@ static inline std::vector<std::string> split(const std::string& str, const char 
  * @param delim - the delimiter.
  * @return std::vector<std::string> that contains all splitted tokens.
  */
-static inline std::vector<std::string> split(const std::string& str, const std::string& delim)
+static std::vector<std::string> split(const std::string& str, const std::string& delim)
 {
     size_t pos_start = 0, pos_end, delim_len = delim.length();
     std::string token;
@@ -369,7 +369,7 @@ static inline std::vector<std::string> split(const std::string& str, const std::
  * @param delims - the set of delimiter characters.
  * @return vector of resulting tokens.
  */
-static inline std::vector<std::string> split_any(const std::string& str, const std::string& delims)
+static std::vector<std::string> split_any(const std::string& str, const std::string& delims)
 {
     std::string token;
     std::vector<std::string> tokens;
@@ -396,7 +396,7 @@ static inline std::vector<std::string> split_any(const std::string& str, const s
  * @return std::string with joined elements of vector tokens with delimiter delim.
  */
 template <typename T>
-static inline std::string join(const std::vector<T>& tokens, const std::string& delim)
+static std::string join(const std::vector<T>& tokens, const std::string& delim)
 {
     std::ostringstream result;
     for (auto it = tokens.begin(); it != tokens.end(); ++it) {
@@ -414,7 +414,7 @@ static inline std::string join(const std::vector<T>& tokens, const std::string& 
  * @brief Inplace removal of all empty strings in a vector<string>
  * @param tokens - vector of strings.
  */
-static inline void drop_empty(std::vector<std::string>& tokens)
+static void drop_empty(std::vector<std::string>& tokens)
 {
     auto last = std::remove_if(
         tokens.begin(), tokens.end(), [](const std::string& s) { return s.size() == 0; });
@@ -426,7 +426,7 @@ static inline void drop_empty(std::vector<std::string>& tokens)
  * @param tokens - vector of strings.
  * @return vector of non-empty tokens.
  */
-static inline std::vector<std::string> drop_empty_copy(std::vector<std::string> tokens)
+static std::vector<std::string> drop_empty_copy(std::vector<std::string> tokens)
 {
     drop_empty(tokens);
     return tokens;
@@ -438,7 +438,7 @@ static inline std::vector<std::string> drop_empty_copy(std::vector<std::string> 
  * @param n - number of iterations.
  * @return std::string with repeated substring str.
  */
-static inline std::string repeat(const std::string& str, unsigned n)
+static std::string repeat(const std::string& str, unsigned n)
 {
     std::string result;
 
@@ -455,7 +455,7 @@ static inline std::string repeat(const std::string& str, unsigned n)
  * @param n - number of iterations.
  * @return std::string with repeated char c.
  */
-static inline std::string repeat(char c, unsigned n) { return std::string(n, c); }
+static std::string repeat(char c, unsigned n) { return std::string(n, c); }
 
 /**
  * @brief Checks if input std::string str matches specified reular expression regex.
@@ -463,7 +463,7 @@ static inline std::string repeat(char c, unsigned n) { return std::string(n, c);
  * @param regex - the std::regex regular expression.
  * @return True if regex matches str, false otherwise.
  */
-static inline bool matches(const std::string& str, const std::regex& regex)
+static bool matches(const std::string& str, const std::regex& regex)
 {
     return std::regex_match(str, regex);
 }
