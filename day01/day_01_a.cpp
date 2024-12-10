@@ -23,7 +23,7 @@ int day01_a(std::string const& input)
     std::ranges::sort(right);
 
     auto view = std::views::zip(left, right)
-        | std::views::transform([](auto const& kvp) { return abs(kvp.first - kvp.second); });
+        | std::views::transform([](auto const& kvp) { return abs(std::get<0>(kvp) - std::get<1>(kvp)); });
 
     return std::ranges::fold_left(view, 0, std::plus());
 }
